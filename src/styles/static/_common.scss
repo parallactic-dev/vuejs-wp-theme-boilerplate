@@ -1,0 +1,16 @@
+html {
+  font-family: $font-family-primary;
+  font-size: 10px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-size: $font-size-text;
+}
+
+p {
+  line-height: 1.4;
+}
