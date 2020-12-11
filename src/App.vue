@@ -20,6 +20,9 @@ export default {
     PageHeader,
     PageFooter,
   },
+  mounted() {
+    this.$store.dispatch('getMenus');
+  }
 };
 </script>
 

@@ -7,6 +7,7 @@ import user from './modules/user';
 import post from './modules/post';
 import page from './modules/page';
 import categories from './modules/categories';
+import common from './modules/common';
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     user,
     post,
     page,
-    categories
+    categories,
+    common
   },
   strict: process.env.NODE_ENV !== 'production',
 });

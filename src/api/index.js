@@ -54,4 +54,17 @@ export default {
         callback(error);
       });
   },
+
+  getMenus(callback) {
+    axios
+      .get(SETTINGS.API_BASE_PATH + `menus`)
+      .then(response => {
+        response.data 
+          ? callback(response.data)
+          : callback(null);
+      })
+      .catch(error => {
+        callback(error);
+      });
+  },
 };
