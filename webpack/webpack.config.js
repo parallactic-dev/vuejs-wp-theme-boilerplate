@@ -12,8 +12,10 @@ module.exports = {
   entry: { index: './src/main.js' },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'scripts/[name].js',
+    filename: '[name].js',
   },
+
+  devtool: isDev ? 'inline-source-map' : false,
 
   module: {
     rules: loaders,
