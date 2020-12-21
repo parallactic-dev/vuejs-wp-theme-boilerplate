@@ -32,8 +32,8 @@ const mutations = {
 const getters = {
   menusLoaded: state => state.menusLoaded,
   menus: state => state.menus,
-  mainMenu: state => state.menus.main ? state.menus.main : null,
-  footerMenu: state => state.menus.footer ? state.menus.footer : null,
+  mainMenu: state => state.menus && state.menus.main ? state.menus.main : null,
+  footerMenu: state => state.menus && state.menus.footer ? state.menus.footer : null,
 };
 
 export default {

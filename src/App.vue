@@ -1,12 +1,16 @@
 <template>
-  <div class="page">
-    <page-header class="page__header" />
+  <div class="page__wrap">
+    <div class="page__start">
+      <page-header />
+    </div>
     <transition name="page-transition" mode="out-in" appear>
-      <div class="page__content">
-        <router-view></router-view>
-      </div>
+      <main class="page__main">
+        <router-view v-bind:key="$route.path"></router-view>
+      </main>
     </transition>
-    <page-footer class="page__footer" />
+    <div class="page__end">
+      <page-footer />
+    </div>
   </div>
 </template>
 
@@ -29,4 +33,20 @@ export default {
 <style lang="scss">
 @import '@/styles/static/main';
 
+.page__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 100vh;
+}
+
+.page__start,
+.page__end {
+  flex: 0 0 auto;
+}
+
+.page__main {
+  flex: 1 1 auto;
+  padding: 14rem 0;
+}
 </style>

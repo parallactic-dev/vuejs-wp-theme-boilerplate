@@ -9,8 +9,19 @@ html {
 
 body {
   font-size: $font-size-text;
+  line-height: 1.7;
+  background-color: $color-shade;
 }
 
 p {
-  line-height: 1.4;
+  margin-top: 4.8rem;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: $color-secondary;
 }

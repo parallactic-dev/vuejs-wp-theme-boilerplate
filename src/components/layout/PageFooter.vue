@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.page-footer {
+  @include container;
+}
 </style>

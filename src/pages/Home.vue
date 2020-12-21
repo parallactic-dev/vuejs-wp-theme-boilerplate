@@ -1,5 +1,5 @@
 <template>
-  <div class="page page--home">
+  <div class="home-page">
     <recent-posts v-bind:limit="5">Recent Posts</recent-posts>
     <some-pages v-bind:limit="5">Pages</some-pages>
   </div>
@@ -17,4 +17,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.home-page {
+  @include container;
+}
+</style>

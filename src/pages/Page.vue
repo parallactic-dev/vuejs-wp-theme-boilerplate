@@ -1,8 +1,12 @@
 <template>
-  <div class="page">
+  <div class="content-page">
     <template v-if="pageLoaded">
-      <h1 class="page__title">{{ pageContent.title.rendered }}</h1>
-      <div class="page__content" v-html="pageContent.content.rendered"></div>
+      <div class="content-page__wrapper">
+        <div class="content-page__content-column">
+          <h1 class="content-page__title">{{ pageContent.title.rendered }}</h1>
+          <div class="content-page__content" v-html="pageContent.content.rendered"></div>
+        </div>
+      </div>
     </template>
     <loader v-else />
   </div>
@@ -37,4 +41,22 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.content-page {
+  @include container;
+}
+
+.content-page__wrapper {
+  @include grid();
+}
+
+.content-page__content-column {
+  @include grid__cell(5);
+  @include grid__cell--push-left(1);
+}
+
+.content-page__title {
+  font-size: 5rem;
+  line-height: 1.2;
+}
+</style>
