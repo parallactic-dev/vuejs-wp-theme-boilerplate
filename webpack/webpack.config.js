@@ -1,21 +1,23 @@
+require('dotenv').config();
+
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const plugins = require('./plugins');
 const loaders = require('./loaders');
-const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  devtool: isDev ? 'inline-source-map' : false,
-  stats: { warnings: false }, // Hide warnings
+  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : false,
+  stats: { warnings: false },
 
   entry: { index: './src/main.js' },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
+    publicPath: process.env.THEME_PATH + 'dist/'
   },
 
-  devtool: isDev ? 'inline-source-map' : false,
+  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : false,
 
   module: {
     rules: loaders,
@@ -32,9 +34,9 @@ module.exports = {
   plugins,
   
   optimization: {
-    chunkIds: isDev ? 'named' : 'total-size',
-    minimize: !isDev,
-    minimizer: isDev
+    chunkIds: process.env.NODE_ENV === 'development' ? 'named' : 'total-size',
+    minimize: !process.env.NODE_ENV === 'development',
+    minimizer: process.env.NODE_ENV === 'development'
       ? []
       : [
           new UglifyJsPlugin({
