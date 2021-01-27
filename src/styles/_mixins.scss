@@ -1,7 +1,7 @@
 @mixin container {
   max-width: 144rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: $size-page-bezel;
+  padding-right: $size-page-bezel;
   margin-left: auto;
   margin-right: auto;
 }
@@ -18,6 +18,7 @@
   width: #{$cols * 8.3333333%};
   padding-right: #{$size-grid-gutter * 0.5};
   padding-left: #{$size-grid-gutter * 0.5};
+  box-sizing: border-box;
 }
 
 @mixin grid__cell--push-left($cols) {
@@ -38,13 +39,13 @@
 
 @mixin grid__cell--full-width-left() {
   flex-grow: 1;
-  margin-left: calc(var(--size-bezel-page-left) * -1 + (#{$size-grid-gutter} * 0.5));
+  margin-left: calc(#{$size-page-bezel} * -1 + (#{$size-grid-gutter} * 0.5));
   padding-left: 0;
 }
 
 @mixin grid__cell--full-width-right() {
   flex-grow: 1;
-  margin-right: calc(var(--size-bezel-page-right) * -1 + (#{$size-grid-gutter} * 0.5));
+  margin-right: calc(#{$size-page-bezel} * -1 + (#{$size-grid-gutter} * 0.5));
   padding-right: 0;
 }
 
