@@ -18,7 +18,9 @@ Instead of having static renderade pages by WordPress this theme uses WordPress 
 ## Getting started
 
 1. **Clone** the repo inside your `wp-content/themes/` directory
-2. **Navigate to the theme directory in your terminal** and run
+2. **Change environment variables** in `.env` file
+  `THEME_PATH` needs to point to your theme folder, relative to your document root.
+3. **Run following commands** 
    `npm install`
    `npm run watch` for development
    `npm run build` when you're ready to deploy the theme.
