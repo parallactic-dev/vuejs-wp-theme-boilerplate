@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import PageHeader from '@/components/layout/PageHeader.vue';
 import PageFooter from '@/components/layout/PageFooter.vue';
 
@@ -55,6 +54,8 @@ export default {
   }
 }
 
+
+// page transition
 $transition-duration: 250ms;
 
 .page-transition-leave-active,
