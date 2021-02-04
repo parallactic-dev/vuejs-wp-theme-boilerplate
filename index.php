@@ -5,6 +5,9 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        window.wpNonce = '<?php echo wp_create_nonce('wp_rest'); ?>';
+    </script>
     <?php wp_head(); ?>
 </head>
 

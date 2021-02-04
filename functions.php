@@ -39,9 +39,12 @@ add_action('init', 'register_menues', 100);
 // register menu rest endpoint
 function register_rest_endpoint()
 {
-	register_rest_route('wp/v2/', '/menus', array(
+	register_rest_route('wp/v2', 'menus', array(
 		'methods' => 'GET',
 		'callback' => '_get_menus',
+		'permission_callback' => function(WP_REST_Request $request) {
+			return wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest');
+		},
 	));
 }
 function _get_menus()
