@@ -67,4 +67,17 @@ export default {
         callback(error);
       });
   },
+
+  postContactForm(data, callback) {
+    axios
+      .post(SETTINGS.API_BASE_PATH + `contact-forms`, data)
+      .then(response => {
+        response 
+          ? callback(response)
+          : callback(null);
+      })
+      .catch(error => {
+        callback(error);
+      });
+  },
 };

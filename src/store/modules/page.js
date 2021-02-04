@@ -12,6 +12,7 @@ const state = {
 const actions = {
   getPage({ commit }, slug) {
     api.getPage(slug, page => {
+      commit(types.PAGE_LOADED, false);
       commit(types.STORE_FETCHED_PAGE, page);
       commit(types.PAGE_LOADED, true);
       commit(types.INCREMENT_LOADING_PROGRESS);
@@ -19,6 +20,7 @@ const actions = {
   },
   getPages({ commit }) {
     api.getPages(pages => {
+      commit(types.PAGES_LOADED, false);
       commit(types.STORE_FETCHED_PAGES, { pages });
       commit(types.PAGES_LOADED, true);
       commit(types.INCREMENT_LOADING_PROGRESS);
