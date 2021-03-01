@@ -68,6 +68,19 @@ export default {
       });
   },
 
+  getMeta(callback) {
+    axios
+      .get(SETTINGS.API_BASE_PATH + `meta`)
+      .then(response => {
+        response.data 
+          ? callback(response.data)
+          : callback(null);
+      })
+      .catch(error => {
+        callback(error);
+      });
+  },
+
   postContactForm(data, callback) {
     axios
       .post(SETTINGS.API_BASE_PATH + `contact-forms`, data)

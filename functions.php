@@ -36,12 +36,19 @@ function register_menues()
 }
 add_action('init', 'register_menues', 100);
 
-// register menu rest endpoint
-function register_rest_endpoint()
+// register menu rest endpoints
+function register_rest_endpoints()
 {
 	register_rest_route('wp/v2', 'menus', array(
 		'methods' => 'GET',
 		'callback' => '_get_menus',
+		'permission_callback' => function(WP_REST_Request $request) {
+			return wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest');
+		},
+	));
+	register_rest_route('wp/v2', 'meta', array(
+		'methods' => 'GET',
+		'callback' => '_get_meta',
 		'permission_callback' => function(WP_REST_Request $request) {
 			return wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest');
 		},
@@ -87,7 +94,26 @@ function _get_index_of_menu_item($array, $ID)
 	}
 	return false;
 }
-add_action('rest_api_init', 'register_rest_endpoint');
+function _get_meta()
+{
+	$fields = array(
+		'name', 
+		'description', 
+		'wpurl', 
+		'url', 
+		'charset', 
+		'version', 
+		'html_type', 
+		'text_direction', 
+		'language'
+	);
+	$meta = array();
+	foreach($fields as $field) {
+		$meta[$field] = get_bloginfo($field);
+	}
+	return new WP_REST_Response($meta, 200);
+}
+add_action('rest_api_init', 'register_rest_endpoints');
 
 // get home page type
 function get_home_page() 

@@ -15,16 +15,52 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import PageHeader from '@/components/layout/PageHeader.vue';
 import PageFooter from '@/components/layout/PageFooter.vue';
+import ogImage from '@/assets/images/og-img.png';
 
 export default {
   components: {
     PageHeader,
     PageFooter,
   },
+  metaInfo () {
+    return {
+      title: this.pageTitle,
+      titleTemplate: `%s | ${this.metaName}`,
+      htmlAttrs: {
+        lang: this.lang,
+      },
+      meta: [
+        { vmid: 'description', name: 'description', content: this.metaDescription },
+        { vmid: 'og:title', property: 'og:title', content: this.pageTitle },
+        { vmid: 'og:description', property: 'og:description', content: this.metaDescription },
+        { vmid: 'og:url', property: 'og:url', content: window.location.href },
+        { vmid: 'og:image', property: 'og:image', content: ogImage }
+      ],
+      link: [
+        { vmid: 'canonical', rel: 'canonical', href: window.location.href },
+      ]
+    }
+  },
   mounted() {
     this.$store.dispatch('getMenus');
+    this.$store.dispatch('getMeta');
+  },
+  computed: {
+    ...mapGetters({
+      meta: 'meta',
+    }),
+    metaLang() {
+      return this.meta ? this.meta.lang : 'de-CH';
+    },
+    metaName() {
+      return this.meta ? this.meta.name : '';
+    },
+    metaDescription() {
+      return this.meta ? this.meta.description : '';
+    },
   }
 };
 </script>

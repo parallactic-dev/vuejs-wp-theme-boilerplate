@@ -26,6 +26,26 @@ export default {
     Loader,
     ContentBlocks
   },
+  metaInfo () {
+    let meta = {
+      title: this.pageTitle,
+      meta: [
+        { vmid: 'description', name: 'description', content: this.metaDescription },
+        { vmid: 'og:title', property: 'og:title', content: this.pageTitle },
+        { vmid: 'og:description', property: 'og:description', content: this.metaDescription },
+        { vmid: 'og:url', property: 'og:url', content: this.linkCanonical },
+      ],
+      link: [
+        { vmid: 'canonical', rel: 'canonical', href: this.linkCanonical },
+      ]
+    };
+
+    if (this.ogImage) {
+      meta.meta.push({ vmid: 'og:image', property: 'og:image', content: this.ogImage });
+    }
+
+    return meta;
+  },
   beforeMount() {
     // read the slug from body data attribute if on home route
     const slug = this.$route.name === 'Home' 
@@ -35,10 +55,29 @@ export default {
   },
   computed: {
     ...mapGetters({
+      meta: 'meta',
       page: 'page',
       pageLoaded: 'pageLoaded',
     }),
-
+    pageTitle() {
+      if (!this.page) return;
+      return this.page.acf.meta_title 
+        ? this.page.acf.meta_title 
+        : this.page.title.rendered;
+    },
+    metaDescription() {
+      if (this.page && this.page.acf.meta_description) {
+        return this.page.acf.meta_description
+      }
+    },
+    linkCanonical() {
+      if (!this.page) return;
+      return `${window.origin}/${this.page.slug}`
+    },
+    ogImage() {
+      if (!this.page || !this.page.acf || !this.page.acf.meta_image) return;
+      return this.page.acf.meta_image.sizes.large;
+    },
     pageContent() {
       return this.page;
     },
