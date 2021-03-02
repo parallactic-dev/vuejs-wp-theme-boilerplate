@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         window.wpNonce = '<?php echo wp_create_nonce('wp_rest'); ?>';
+        window.publicDir = '<?php echo get_template_directory_uri(); ?>/public';
     </script>
     <?php wp_head(); ?>
 </head>

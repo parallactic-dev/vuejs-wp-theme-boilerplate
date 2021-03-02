@@ -18,7 +18,6 @@
 import { mapGetters } from 'vuex';
 import PageHeader from '@/components/layout/PageHeader.vue';
 import PageFooter from '@/components/layout/PageFooter.vue';
-import ogImage from '@/assets/images/og-img.png';
 
 export default {
   components: {
@@ -37,7 +36,7 @@ export default {
         { vmid: 'og:title', property: 'og:title', content: this.pageTitle },
         { vmid: 'og:description', property: 'og:description', content: this.metaDescription },
         { vmid: 'og:url', property: 'og:url', content: window.location.href },
-        { vmid: 'og:image', property: 'og:image', content: ogImage }
+        { vmid: 'og:image', property: 'og:image:secure_url', itemprop: 'image', content: `${window.publicDir}/og-img.png` }
       ],
       link: [
         { vmid: 'canonical', rel: 'canonical', href: window.location.href },

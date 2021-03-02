@@ -121,3 +121,24 @@ function get_home_page()
 	$post_id = get_option('page_on_front');
 	return $post_id ? get_post_field('post_name', $post_id) : null;
 }
+
+// add static meta tags as no js fallback
+function add_static_meta_tags() {
+	$title = get_bloginfo('name');
+	$description = get_bloginfo('description');
+
+	echo '<title>' . $title . '</title>';
+	echo '<meta data-vmid="description" name="description" content="' . $description . '">';
+
+	echo '<link data-n-head="ssr" rel="icon" type="image/x-icon" href="' . get_template_directory_uri() . '/dist/favicon.ico">';
+	echo '<link data-n-head="ssr" rel="icon" type="image/png" sizes="196x196" href="' . get_template_directory_uri() . '/dist/favicon-196.png">';
+	echo '<link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="' . get_template_directory_uri() . '/dist/favicon-96.png">';
+	echo '<link data-n-head="ssr" rel="icon" type="image/png" sizes="32x32" href="' . get_template_directory_uri() . '/dist/favicon-32.png">';
+
+	echo '<meta property="og:type" content="website">';
+	echo '<meta property="og:site_name" content="' . $title . '">';
+	echo '<meta data-vmid="og:title" property="og:title" content="' . $title . '">';
+	echo '<meta data-vmid="og:description" property="og:description" content="' . $description . '">';
+	echo '<meta data-vmid="og:image" property="og:image:secure_url" itemprop="image" content="' . get_template_directory_uri() . '/dist/og-img.png">';
+}
+add_action('wp_head', 'add_static_meta_tags', 99);
